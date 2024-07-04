@@ -1,8 +1,13 @@
+using Database.Extantions;
+using PumpService.Extansions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddDatabaseModule(builder.Configuration);
+builder.Services.AddPumpService();
 
 var app = builder.Build();
 
