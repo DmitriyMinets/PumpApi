@@ -15,7 +15,13 @@ namespace PumpService
         public PumpService(ApplicationContext db)
         {
             _db = db;
-            Initializer.InitializeDB(_db);
+        }
+
+        public async Task AddMotor(MotorRQ motor)
+        {
+            var newMotor = motor.Map();
+            await _db.Motors.AddAsync(newMotor);
+            await _db.SaveChangesAsync();
         }
 
         public async Task AddPump(PumpRQ pump)
@@ -25,22 +31,35 @@ namespace PumpService
             await _db.SaveChangesAsync();
         }
 
-        public async Task DeleteById(int id)
+        public async Task<string> DeleteById(int id)
         {
             var pump = await _db.Pumps.FindAsync(id) ??
                 throw new ArgumentException("Насос не найден");
+            var pathToImage = pump.ImageUrl;
             _db.Pumps.Remove(pump);
             await _db.SaveChangesAsync();
+            return pathToImage;
+        }
+
+        public async Task<IEnumerable<Material>> GetMaterials()
+        {
+            return await _db.Materials.OrderBy(e => e.Id).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Motor>> GetMotors()
+        {
+            return await _db.Motors.OrderBy(e => e.Id).ToListAsync();
         }
 
         public async Task<IEnumerable<Pump>> GetPumps()
         {
-            return await _db.AllIncludedPupms().ToArrayAsync();
+            return await _db.AllIncludedPupms().OrderBy(p => p.Id).ToListAsync();
         }
 
-        public async Task UpdatePump(Pump pump)
+        public async Task UpdatePump(PumpRQ pump)
         {
-            _db.Pumps.Update(pump);
+            var oldPump = pump.Map();
+            _db.Pumps.Update(oldPump);
             await _db.SaveChangesAsync();
         }
     }

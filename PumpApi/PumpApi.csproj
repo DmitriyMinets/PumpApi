@@ -21,4 +21,8 @@
     <ProjectReference Include="..\PumpService\PumpService.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

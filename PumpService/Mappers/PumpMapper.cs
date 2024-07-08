@@ -9,6 +9,7 @@ namespace PumpService.Mappers
         {
             return new Pump()
             {
+                Id = pump.Id ?? 0,
                 Name = pump.Name,
                 MaxPressure = pump.MaxPressure,
                 LiquidTemperature = pump.LiquidTemperature,
@@ -17,7 +18,7 @@ namespace PumpService.Mappers
                 BodyMaterialId = pump.BodyMaterialId,
                 ImpellerMaterialId = pump.ImpellerMaterialId,
                 Description = pump.Description,
-                Image = pump.Image,
+                ImageUrl = pump.ImageUrl,
                 Price = pump.Price,
             };
         }

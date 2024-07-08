@@ -13,7 +13,7 @@
         public int ImpellerMaterialId {  get; set; }
         public Material ImpellerMaterial { get; set; } = null!;
         public string? Description { get; set; } 
-        public string? Image {  get; set; }
+        public string? ImageUrl {  get; set; }
         public decimal Price { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace Database
     {
         public static void InitializeDB(ApplicationContext context)
         {
-            if(!context.Pumps.Any())
+            if (!context.Pumps.Any())
             {
                 var pumps = GetPumps();
                 context.Pumps.AddRange(pumps);
@@ -64,6 +64,18 @@ namespace Database
                     Weight = 18,
                     Price = 1749.75M,
                     Description = "Описание насоса-4",
+                    Motor = listMotors[2],
+                    BodyMaterial = listMaterials[3],
+                    ImpellerMaterial = listMaterials[4],
+                },
+                new()
+                {
+                    Name = "Насос 5",
+                    MaxPressure = 13.8,
+                    LiquidTemperature = 94,
+                    Weight = 18,
+                    Price = 1749.75M,
+                    Description = "Описание насоса-5",
                     Motor = listMotors[2],
                     BodyMaterial = listMaterials[3],
                     ImpellerMaterial = listMaterials[4],
